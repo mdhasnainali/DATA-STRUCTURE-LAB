@@ -1,6 +1,3 @@
-from multiprocessing.sharedctypes import Value
-
-
 def linear_searching(arr,value):
     length = len(arr);
     for i in range(0,length):
