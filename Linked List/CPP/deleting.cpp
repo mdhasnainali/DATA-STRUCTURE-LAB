@@ -10,10 +10,10 @@ struct node
 };
 
 Node *create_node();
-void insert_in_beginning(int value, Node **start);
 void insert_in_ending(int value, Node **start);
 void insert_in_specific_position(int value, Node *start);
 void linked_list_print(Node *start);
+void deleting(int value, Node **start);
 
 int main()
 {
@@ -23,9 +23,10 @@ int main()
 
     for (int i = 0; i < length; i++)
     {
-        // insert_in_beginning(arr[i], &start);
         insert_in_ending(arr[i], &start);
     }
+    linked_list_print(start);
+    deleting(5, &start);
     linked_list_print(start);
 }
 
@@ -38,15 +39,6 @@ Node *create_node()
         cout << "Error while creating new node" << endl;
     }
     return node;
-}
-
-void insert_in_beginning(int value, Node **start)
-{
-    Node *new_node = create_node();
-
-    new_node->data = value;
-    new_node->next_pointer = *start;
-    *start = new_node;
 }
 
 void linked_list_print(Node *start)
@@ -86,5 +78,28 @@ void insert_in_ending(int value, Node **start)
 }
 
 /*
-    Creating and inserting should be always insert_in_ending() for exam
+    Deleting
 */
+void deleting(int value, Node **start)
+{
+    Node *current_node = *start;
+    Node *next_node = current_node->next_pointer;
+
+    if (current_node == NULL)
+    {
+        cout << "Underflow" << endl;
+        exit(1);
+    }
+    else if(current_node->data==value){
+        *start = current_node->next_pointer;
+        return ;
+    }
+    while (current_node->next_pointer != NULL && next_node->data != value)
+    {
+        current_node = current_node->next_pointer;
+        next_node = current_node->next_pointer;
+    }
+    
+    current_node->next_pointer = next_node->next_pointer;
+    free(next_node);
+}

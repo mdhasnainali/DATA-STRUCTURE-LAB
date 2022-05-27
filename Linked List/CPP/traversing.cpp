@@ -49,6 +49,10 @@ void insert_in_beginning(int value, Node **start)
     *start = new_node;
 }
 
+/*
+    Traversing
+*/
+
 void linked_list_print(Node *start)
 {
     if (start == NULL)
@@ -84,7 +88,3 @@ void insert_in_ending(int value, Node **start)
     current_node->next_pointer = new_node;
     new_node->next_pointer = NULL;
 }
-
-/*
-    Creating and inserting should be always insert_in_ending() for exam
-*/
