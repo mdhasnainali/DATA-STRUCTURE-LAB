@@ -26,7 +26,7 @@ int main()
         insert_in_ending(arr[i], &start);
     }
     linked_list_print(start);
-    search_linked_list(start, 6);
+    search_linked_list(start, 3);
 }
 
 Node *create_node()
