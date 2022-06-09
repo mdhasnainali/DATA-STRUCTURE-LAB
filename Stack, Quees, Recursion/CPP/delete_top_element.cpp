@@ -20,18 +20,9 @@ int main()
     push(12);
     push(15);
 
-    cout<<"Elements: ";
-
-    // print stack data
-    while (!isEmpty())
-    {
-        int data = pop();
-        cout << data << " ";
-    }
-    cout << endl;
-
-    cout << (isFull() ? "true" : "false") << endl;
-    cout << (isEmpty() ? "true" : "false") << endl;
+    // delete and print stack top element
+    int data = pop();
+    cout << data << " ";
 }
 
 void push(int n)

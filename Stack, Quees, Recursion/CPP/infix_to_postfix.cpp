@@ -2,20 +2,59 @@
 using namespace std;
 
 int const MAX = 100;
-int stack[MAX];
+char stack[MAX];
 int top = -1;
 
-void push(int n);
-int pop();
+void push(char n);
+char pop();
 int isEmpty();
 int isFull();
+int precedence(char x);
 
 int main()
 {
-     
+
+    string infix = "A+(B*C-(D/E^F)*G)*H";
+    // cin>>infix;
+
+    push('(');
+    infix += ")";
+
+    int length = infix.length();
+    cout << length << endl;
+
+    for (int i = 0; i < length; i++)
+    {
+        char exp = infix[i];
+        if (exp >= 'A' && exp <= 'Z')
+        {
+            cout << exp;
+        }
+        else
+        {
+            char top_in_stack = stack[top];
+            if (exp == ')')
+            {
+                while (stack[top] != '(')
+                {
+                    cout << pop();
+                }
+                pop();
+            }
+            else if (precedence(top_in_stack) > precedence(exp) && exp != '(')
+            {
+                cout << pop();
+                push(exp);
+            }
+            else
+            {
+                push(exp);
+            }
+        }
+    }
 }
 
-void push(int n)
+void push(char n)
 {
     if (!isFull())
     {
@@ -26,11 +65,11 @@ void push(int n)
         cout << "Stack Full" << endl;
 }
 
-int pop()
+char pop()
 {
     if (!isEmpty())
     {
-        int temp = stack[top];
+        char temp = stack[top];
         top--;
         return temp;
     }
@@ -54,4 +93,16 @@ int isFull()
         return 1;
     else
         return 0;
+}
+
+int precedence(char x)
+{
+    if (x == '(')
+        return 0;
+    else if (x == '+' || x == '-')
+        return 1;
+    else if (x == '*' || x == '/')
+        return 2;
+    else
+        return 3;
 }

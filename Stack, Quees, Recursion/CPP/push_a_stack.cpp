@@ -19,7 +19,6 @@ int main()
     push(1);
     push(12);
     push(15);
-
 }
 
 void push(int n)
@@ -29,7 +28,8 @@ void push(int n)
         top++;
         stack[top] = n;
     }
-    else cout << "Stack Full" << endl;
+    else
+        cout << "Stack Full" << endl;
 }
 
 int pop()
