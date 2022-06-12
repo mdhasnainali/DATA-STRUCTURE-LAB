@@ -21,7 +21,7 @@ int main()
     infix += ")";
 
     int length = infix.length();
-    cout << length << endl;
+    // cout << length << endl;
 
     for (int i = 0; i < length; i++)
     {
