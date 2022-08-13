@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define inf 100000000
+
 int main() {
     int n;
     cin >> n;
@@ -10,13 +12,14 @@ int main() {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             cin >> adjMatrix[i][j];
+            if (adjMatrix[i][j] == 0) adjMatrix[i][j] = inf;
         }
     }
 
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < 4; i++) {
         for (int j = 0; j < n; j++) {
             for (int k = 0; k < n; k++) {
-                tempMatrix[j][k] = adjMatrix[j][k] || (adjMatrix[j][i] && adjMatrix[i][k]);
+                tempMatrix[j][k] = min(adjMatrix[j][k], (adjMatrix[j][i] + adjMatrix[i][k]));
             }
         }
 
