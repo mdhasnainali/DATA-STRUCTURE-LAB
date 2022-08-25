@@ -8,6 +8,8 @@ struct node
     Node *next_pointer;
 };
 
+const int n = 5;
+Node *adjList[n];
 int visited[100] = {0};
 Node *create_node();
 void insert_in_ending(int value, Node **start);
@@ -18,30 +20,29 @@ void dfs(Node *start){
     
     visited[start->data] = 1;
     cout<<start->data<<" ";
-    dfs(start->next_pointer);
+    dfs(adjList[start->next_pointer->data]);
 }
 
 int main(){
-    const int n = 5;
-    // cin>> n ; 
-    Node *start[n];
 
     for(int i=0;i<5;i++){
-        start[i] = NULL;
-        insert_in_ending(i,&start[i]);
+        adjList[i] = NULL;
+        insert_in_ending(i,&adjList[i]);
     }
 
     int m,k,l;
     cin>>m;
     for(int i=0;i<m;i++){
         cin>>k>>l;
-        insert_in_ending(k, &start[l]);
-        insert_in_ending(l, &start[k]);
+        insert_in_ending(k, &adjList[l]);
+        insert_in_ending(l, &adjList[k]);
     }
 
     for(int i=0;i<n;i++){
         if(visited[i] == 0){
-            dfs(start[i]);
+            // cout<<i<<" ";
+            // visited[i] = 1;
+            dfs(adjList[i]);
         }
         // linked_list_print(start[i]);
     }
@@ -95,3 +96,16 @@ void insert_in_ending(int value, Node **start)
     current_node->next_pointer = new_node;
     new_node->next_pointer = NULL;
 }
+
+/**
+
+7
+0 2
+0 4
+2 3
+2 4
+2 1
+1 3
+1 4
+ 
+ */
